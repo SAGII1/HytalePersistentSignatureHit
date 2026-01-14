@@ -1,0 +1,17 @@
+{
+  "Group": "com.example.persistentsignaturehit",
+  "Name": "PersistentSignatureHit",
+  "Version": "1.0.0",
+  "Description": "A Hytale mod for Persistent Signature Hits.",
+  "Authors": [
+    {
+      "Name": "Enzo LEBLANC GALBERT"
+    }
+  ],
+  "Website": "https://enzoleblancgalbert.com",
+  "Main": "com.example.persistentsignaturehit.PersistentSignatureHit",
+  "ServerVersion": "*",
+  "Dependencies": {},
+  "OptionalDependencies": {},
+  "DisabledByDefault": false
+}
