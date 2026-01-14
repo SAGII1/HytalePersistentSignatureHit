@@ -42,4 +42,24 @@ bin/
 ### Mac OS ###
 .DS_Store
 
+### Hytale Server Runtime ###
+# Server runtime directory
 run/
+
+# Server logs
+logs/
+
+# Server world data
+universe/
+
+# Downloaded/runtime mods (keep source mods in src/)
+mods/
+
+# Server configuration files (runtime-generated)
+config.json
+bans.json
+permissions.json
+whitelist.json
+
+# Cache directories
+.cache/
