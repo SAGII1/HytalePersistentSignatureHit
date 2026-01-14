@@ -63,3 +63,5 @@ whitelist.json
 
 # Cache directories
 .cache/
+
+SERVER/
