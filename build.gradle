@@ -20,7 +20,7 @@ repositories {
 dependencies {
     testImplementation platform('org.junit:junit-bom:5.10.0')
     testImplementation 'org.junit.jupiter:junit-jupiter'
-    implementation(files(System.getProperty("user.home") + "/AppData/Roaming/Hytale/install/release/package/game/$game_build/Server/HytaleServer.jar"))
+    implementation(files(System.getProperty("user.home") + "/AppData/Roaming/Hytale/install/$patchline/package/game/$game_build/Server/HytaleServer.jar"))
 }
 
 def serverRunDir = file("$projectDir/run")
@@ -29,7 +29,7 @@ idea.project.settings.runConfigurations {
     'HytaleServer'(org.jetbrains.gradle.ext.Application) {
         mainClass = 'com.hypixel.hytale.Main'
         moduleName = project.idea.module.name + '.main'
-        programParameters = "--allow-op --disable-sentry --assets=$hytaleHome/$patchline/package/game/latest/Assets.zip --mods=${file("src/main/").absolutePath}  --auth-mode insecure"
+        programParameters = "--allow-op --disable-sentry --assets=\"${System.getProperty('user.home')}/AppData/Roaming/Hytale/install/$patchline/package/game/$game_build/Assets.zip\" --mods=\"${file('src/main').absolutePath}\""
         workingDirectory = serverRunDir.absolutePath
     }
 }
@@ -53,4 +53,25 @@ processResources {
         expand(expandProps)
     }
     inputs.properties(expandProps)
+}
+
+task runServer(type: JavaExec) {
+    group = 'application'
+    description = 'Run Hytale Server with mod'
+    
+    mainClass = 'com.hypixel.hytale.Main'
+    classpath = files("${System.getProperty('user.home')}/AppData/Roaming/Hytale/install/$patchline/package/game/$game_build/Server/HytaleServer.jar")
+    
+    workingDir = file("$projectDir/run")
+    
+    args = [
+        '--allow-op',
+        '--disable-sentry',
+        "--assets=${System.getProperty('user.home')}/AppData/Roaming/Hytale/install/$patchline/package/game/$game_build/Assets.zip",
+        "--mods=${file('src/main').absolutePath}"
+    ]
+    
+    doFirst {
+        file("$projectDir/run").mkdirs()
+    }
 }

@@ -1,5 +1,5 @@
 $hytaleHome = "$env:APPDATA\Hytale\install"
-$patchline = "release"
+$patchline = "pre-release"
 $gameBuild = "latest"
 
 $serverJar = "$hytaleHome\$patchline\package\game\$gameBuild\Server\HytaleServer.jar"
@@ -19,4 +19,4 @@ if (-not (Test-Path $java)) {
 $modPath = "$PSScriptRoot\src"
 
 Write-Host "Starting Hytale Server with mod from: $modPath"
-& $java -jar $serverJar --allow-op --disable-sentry --assets=$assetsZip --mods=$modPath
+& $java -jar $serverJar --allow-op --disable-sentry --assets=$assetsZip --mods=$modPath --auth-mode insecure

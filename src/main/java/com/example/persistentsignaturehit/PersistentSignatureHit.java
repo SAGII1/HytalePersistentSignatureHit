@@ -9,10 +9,22 @@ public class PersistentSignatureHit extends JavaPlugin {
         super(init);
     }
 
-    public void onEnable() {
+    @Override
+    protected void setup() {
+        super.setup();
         System.out.println("Hello Hytale! PersistentSignatureHit mod setup complete.");
+
     }
 
-    public void onDisable() {
+    public Object getEntityRegistryAccess() {
+        return this.getEntityRegistry();
     }
+
+    /*
+     * public void onEnable() {
+     * }
+     * 
+     * public void onDisable() {
+     * }
+     */
 }
