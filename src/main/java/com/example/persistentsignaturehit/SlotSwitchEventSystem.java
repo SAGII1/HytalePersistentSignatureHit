@@ -12,12 +12,9 @@ import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-/**
- * Event system that handles slot switching events.
- */
 public class SlotSwitchEventSystem extends EntityEventSystem<EntityStore, SwitchActiveSlotEvent> {
 
-    protected SlotSwitchEventSystem() {
+    public SlotSwitchEventSystem() {
         super(SwitchActiveSlotEvent.class);
     }
 
@@ -27,18 +24,21 @@ public class SlotSwitchEventSystem extends EntityEventSystem<EntityStore, Switch
             @Nonnull CommandBuffer<EntityStore> commandBuffer,
             @Nonnull SwitchActiveSlotEvent event) {
 
+        System.out.println("[SlotSwitch] Event received! Entity ID index: " + i);
+
         var ref = archetypeChunk.getReferenceTo(i);
         PlayerRef playerRef = store.getComponent(ref, PlayerRef.getComponentType());
 
-        if (playerRef == null) {
-            return;
+        if (playerRef != null) {
+            SignaturePersistenceSystem.incrementStat();
+            int stat = SignaturePersistenceSystem.getStat();
+
+            System.out.println("[SlotSwitch] Player " + playerRef.toString() +
+                    " switched from " + event.getPreviousSlot() +
+                    " to " + event.getNewSlot() +
+                    " Stat: " + stat);
+            // TODO: Send chat message to player
         }
-
-        // Log the slot switch
-        System.out.println("[SlotSwitch] Player switched from slot " +
-                event.getPreviousSlot() + " to slot " + event.getNewSlot());
-
-        // TODO: Implement signature energy preservation logic here
     }
 
     @Nullable

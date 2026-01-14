@@ -65,3 +65,4 @@ whitelist.json
 .cache/
 
 SERVER/
+*.txt
