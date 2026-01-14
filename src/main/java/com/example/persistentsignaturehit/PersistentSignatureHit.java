@@ -12,19 +12,17 @@ public class PersistentSignatureHit extends JavaPlugin {
     @Override
     protected void setup() {
         super.setup();
-        System.out.println("Hello Hytale! PersistentSignatureHit mod setup complete.");
+        System.out.println("[PersistentSignatureHit] Setting up slot switch event system...");
 
+        // Register the slot switch event system
+        try {
+            getEntityStoreRegistry().registerSystem(new SlotSwitchEventSystem());
+            System.out.println("[PersistentSignatureHit] SlotSwitchEventSystem registered successfully!");
+        } catch (Exception e) {
+            System.err.println("[PersistentSignatureHit] Failed to register event system: " + e.getMessage());
+            e.printStackTrace();
+        }
+
+        System.out.println("[PersistentSignatureHit] Setup complete");
     }
-
-    public Object getEntityRegistryAccess() {
-        return this.getEntityRegistry();
-    }
-
-    /*
-     * public void onEnable() {
-     * }
-     * 
-     * public void onDisable() {
-     * }
-     */
 }
